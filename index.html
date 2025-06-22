@@ -3,54 +3,59 @@
 
 <head>
     <title>Simple Counter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f4f4f4;
-        }
-
-        .counter-box {
-            background: white;
-            display: inline-block;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        #count {
-            font-size: 48px;
-            margin: 20px 0;
-        }
-
-        button {
-            font-size: 24px;
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: white;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="vh-100">
 
-    <div class="counter-box">
-        <h1>Simple Counter</h1>
-        <div id="count">0</div>
-        <button onclick="increase()">Increase</button>
+
+    <div class="d-flex w-100 justify-content-center mt-3">
+        <a class="btn btn-primary" href="counter.html">Go to counter page</a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="shadow-lg mt-4 w-50 rounded p-5">
+            <div class="d-flex justify-content-center">
+                <h3>Simple Todo List</h3>
+            </div>
+            <div class="mt-1 d-flex justify-content-center">
+                <div class="input-group w-75">
+                    <div class="input-group-text d-flex align-items-center">
+                        <input class="form-check-input mb-1" type="checkbox" id="importantCheck" />
+                        <label class="form-check-label ms-2" for="importantCheck">IMPORTANT</label>
+                    </div>
+                    <input id="todoInput" type="text" class="form-control" placeholder="New Todo">
+                    <button onclick="addTask()" class="btn btn-secondary" type="button">Add</button>
+                </div>
+            </div>
+
+            <ul id="todoList" class="list-group mt-5"></ul>
+        </div>
     </div>
 
     <script>
-        let count = 0
+        function addTask() {
+            const input = document.getElementById("todoInput")
+            const isImportantInput = document.getElementById("importantCheck")
+            const todo = input.value.trim()
+            const isImportant = isImportantInput.checked
 
-        function increase() {
-            count++
-            document.getElementById("count").innerText = count
+            if (todo === "") return
+
+            const li = document.createElement("li")
+            if (isImportant) {
+                li.innerText = `${todo} (IMPORTANT)`
+            } else {
+                li.innerText = todo
+            }
+
+            li.className = "list-group-item"
+
+            document.getElementById("todoList").appendChild(li)
+            input.value = ""
         }
     </script>
 
